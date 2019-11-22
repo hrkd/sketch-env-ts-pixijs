@@ -10,11 +10,16 @@ module.exports = {
       {
         test: /\.ts$/,
         use: 'ts-loader'
+      },
+      {
+        test: /\.(glsl|vs|fs|vert|frag)$/,
+        exclude: /node_modules/,
+        use: 'raw-loader'
       }
     ]
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js', '.frag']
   },
   devServer: {
     contentBase: `${__dirname}/public`
