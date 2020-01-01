@@ -7,6 +7,7 @@ class Circle {
   speedX
   speedY
   scale
+  screen
 
   constructor(x, y, screen) {
     this.circle = new PIXI.Graphics();
@@ -16,16 +17,17 @@ class Circle {
     this.speedX = Math.random() * 10
     this.speedY = Math.random() * 10
     this.scale = Math.random() * 300
+    this.screen = screen
   }
 
   update(){
-    if(this.x > screen.width) {
+    if(this.screen.width < this.x) {
       this.speedX = -Math.abs(this.speedX)
     } else if (this.x < 0) {
       this.speedX = Math.abs(this.speedX)
     }
 
-    if(this.y > screen.height) {
+    if(this.screen.height < this.y) {
       this.speedY = -Math.abs(this.speedY)
     } else if (this.y < 0) {
       this.speedY = Math.abs(this.speedY)
