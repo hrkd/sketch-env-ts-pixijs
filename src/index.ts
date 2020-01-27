@@ -5,8 +5,8 @@ import Tweakpane from 'tweakpane'
 import Color from 'color'
 
 const PARAMS = {
-  blur: 59.63,
-  resolution: .11,
+  blur: 74.0,
+  resolution: .15,
   bone: false
 };
 
