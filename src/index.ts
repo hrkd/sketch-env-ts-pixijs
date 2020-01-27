@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js'
 import fragmentShader from './shader/main.frag'
 import Circle from './circle'
 import Tweakpane from 'tweakpane'
+import Color from 'color'
 
 const PARAMS = {
   blur: 59.63,
@@ -9,18 +10,30 @@ const PARAMS = {
   bone: false
 };
 
+let colors = [
+  Color.rgb(119, 89, 163),
+  Color.rgb(246, 225, 180),
+  Color.rgb(146, 196, 168),
+  Color.rgb(247, 138, 99)
+]
+
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+shuffle(colors)
+
 //filters
 const myFilter1 = new PIXI.Filter(
-  null,fragmentShader,{threshold:0.6,r:0.96,g:0.54,b:0.38}
+  null,fragmentShader,{threshold:0.6,r:colors[0].color[0]/255,g:colors[0].color[1]/255,b:colors[0].color[2]/255}
 );
 
 const myFilter2 = new PIXI.Filter(
-  null,fragmentShader,{threshold:0.6,r:0.96,g:0.88,b:0.71}
+  null,fragmentShader,{threshold:0.6,r:colors[1].color[0]/255,g:colors[1].color[1]/255,b:colors[1].color[2]/255}
 );
 
 
 const myFilter3 = new PIXI.Filter(
-  null,fragmentShader,{threshold:0.6,r:0.47,g:0.35,b:0.64}
+  null,fragmentShader,{threshold:0.6,r:colors[2].color[0]/255,g:colors[2].color[1]/255,b:colors[2].color[2]/255}
 );
 //rgb(47%, 35%, 64%)
 
@@ -32,14 +45,15 @@ blurFilter.resolution = PARAMS.resolution;
 bone = PARAMS.bone;
 
 //app
-const backgroundColor = 0x8EC8A7;
 const container1 = new PIXI.Container();
 const container2 = new PIXI.Container();
 const container3 = new PIXI.Container();
 
 const container4 = new PIXI.Container();
 
-const app = new PIXI.Application({ width: 1000, height: 1000, backgroundColor: backgroundColor, antialias: true, forceFXAA: true });
+
+console.log(colors[3].hex())
+const app = new PIXI.Application({ width: 1000, height: 1000, backgroundColor: Number(`0x${colors[3].hex().replace("#","")}`) , antialias: true, forceFXAA: true });
 
 app.stage.interactive = true;
 app.stage.addChild(container1)
