@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import { Random } from "random-js";
 
 class Circle {
   circle
@@ -12,25 +13,27 @@ class Circle {
   type
 
   constructor(screen, type="LT") {
+    const random = new Random(); // uses the nativeMath engine
+
     this.circle = new PIXI.Graphics();
     this.circle.lineStyle(0);
     this.bone = new PIXI.Graphics();
     switch(type) {
       case "LT":
-        this.x = 0
-        this.y = 0
+        this.x = random.integer(0, screen.width/2)
+        this.y = random.integer(0, screen.height/2)
         break;
       case "RT":
-        this.x = screen.width
-        this.y = 0
+        this.x = random.integer(screen.width/2, screen.width)
+        this.y = random.integer(0, screen.height/2)
         break;
       case "LB":
-        this.x = 0
-        this.y = screen.height
+        this.x = random.integer(0, screen.width/2)
+        this.y = random.integer(screen.height/2, screen.height)
         break;
       case "RB":
-        this.x = screen.width
-        this.y = screen.height
+        this.x = random.integer(screen.width/2, screen.width)
+        this.y = random.integer(screen.height/2, screen.height)
         break;
     }
 
