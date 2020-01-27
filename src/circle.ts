@@ -38,7 +38,7 @@ class Circle {
     }
 
     this.speedX = this.speedY = Math.random() * 3
-    this.scale = random.integer(20, 150)
+    this.scale = random.integer(20, 200)
     this.screen = screen
     this.type = type
   }
