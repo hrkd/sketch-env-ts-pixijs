@@ -1,8 +1,17 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   mode: 'development',
   entry: './src/index.ts',
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      title: 'Output Management',
+      inject: false
+    })
+  ],
   output: {
-    path: `${__dirname}/build`,
+    path: `${__dirname}/docs`,
     filename: 'bundle.js'
   },
   module: {
