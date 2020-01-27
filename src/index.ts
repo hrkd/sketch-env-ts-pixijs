@@ -91,7 +91,7 @@ circles3.forEach(c=>{
 
 //window
 const resize = ()=>{
-  app.renderer.resize(document.body.clientWidth, document.body.clientHeight);
+  app.renderer.resize(document.body.clientWidth+40, document.body.clientHeight+40);
 }
 window.onresize = resize
 window.onload = resize
