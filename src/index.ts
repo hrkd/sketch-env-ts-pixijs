@@ -4,13 +4,26 @@ import Circle from './circle'
 import Tweakpane from 'tweakpane'
 
 const PARAMS = {
-  blur: 115,
-  resolution: .06,
-  bone: true
+  blur: 59.63,
+  resolution: .11,
+  bone: false
 };
 
 //filters
-const myFilter = new PIXI.Filter(null,fragmentShader,{threshold:0.6});
+const myFilter1 = new PIXI.Filter(
+  null,fragmentShader,{threshold:0.6,r:0.96,g:0.54,b:0.38}
+);
+
+const myFilter2 = new PIXI.Filter(
+  null,fragmentShader,{threshold:0.6,r:0.96,g:0.88,b:0.71}
+);
+
+
+const myFilter3 = new PIXI.Filter(
+  null,fragmentShader,{threshold:0.6,r:0.47,g:0.35,b:0.64}
+);
+//rgb(47%, 35%, 64%)
+
 const blurFilter = new PIXI.filters.BlurFilter();
 let bone:Boolean = true
 
@@ -19,25 +32,49 @@ blurFilter.resolution = PARAMS.resolution;
 bone = PARAMS.bone;
 
 //app
-const app = new PIXI.Application({ width: 1000, height: 1000, backgroundColor: 0xffffff, antialias: true, forceFXAA: true });
+const backgroundColor = 0x8EC8A7;
 const container1 = new PIXI.Container();
 const container2 = new PIXI.Container();
+const container3 = new PIXI.Container();
+
+const container4 = new PIXI.Container();
+
+const app = new PIXI.Application({ width: 1000, height: 1000, backgroundColor: backgroundColor, antialias: true, forceFXAA: true });
 
 app.stage.interactive = true;
 app.stage.addChild(container1)
 app.stage.addChild(container2)
-container1.filters = [blurFilter, myFilter];
+app.stage.addChild(container3)
+
+app.stage.addChild(container4)
+
+container1.filters = [blurFilter, myFilter1];
+container2.filters = [blurFilter, myFilter2];
+container3.filters = [blurFilter, myFilter3];
+
 app.ticker.add(delta=>{
-    circles.forEach(c=>{
-      c.update(bone)
-    })
+    circles1.forEach(c=>c.update(bone))
+    circles2.forEach(c=>c.update(bone))
+    circles3.forEach(c=>c.update(bone))
 });
 
 //object
-const circles = new Array(10).fill(null).map(c=>new Circle(0,0, app.screen))
-circles.forEach(c=>{
+const circles1 = new Array(15).fill(null).map(c=>new Circle(app.screen, "LT"))
+circles1.forEach(c=>{
   container1.addChild(c.circle)
-  container2.addChild(c.bone)
+  container4.addChild(c.bone)
+})
+
+const circles2 = new Array(15).fill(null).map(c=>new Circle(app.screen, "RB"))
+circles2.forEach(c=>{
+  container2.addChild(c.circle)
+  container4.addChild(c.bone)
+})
+
+const circles3 = new Array(15).fill(null).map(c=>new Circle(app.screen, "LB"))
+circles3.forEach(c=>{
+  container3.addChild(c.circle)
+  container4.addChild(c.bone)
 })
 
 //window

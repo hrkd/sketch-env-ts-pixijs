@@ -9,29 +9,83 @@ class Circle {
   speedY
   scale
   screen
+  type
 
-  constructor(x, y, screen) {
+  constructor(screen, type="LT") {
     this.circle = new PIXI.Graphics();
     this.circle.lineStyle(0);
     this.bone = new PIXI.Graphics();
-    this.x = x
-    this.y = y
-    this.speedX = Math.random() * 5
-    this.speedY = Math.random() * 5
-    this.scale = Math.random() * 300
+    switch(type) {
+      case "LT":
+        this.x = 0
+        this.y = 0
+        break;
+      case "RT":
+        this.x = screen.width
+        this.y = 0
+        break;
+      case "LB":
+        this.x = 0
+        this.y = screen.height
+        break;
+      case "RB":
+        this.x = screen.width
+        this.y = screen.height
+        break;
+    }
+
+    this.speedX = this.speedY = Math.random() * 3
+    this.scale = Math.random() * 150
     this.screen = screen
+    this.type = type
   }
 
   update(bone:Boolean = true){
-    if(this.screen.width < this.x) {
+    let maxX:Boolean
+    let minX:Boolean
+    let maxY:Boolean
+    let minY:Boolean
+
+    switch(this.type) {
+      case "LT":
+        maxX = this.screen.width/2 < this.x
+        minX = this.x < 0
+
+        maxY = this.screen.height/2 < this.y
+        minY = this.y < 0
+        break;
+      case "RT":
+        maxX = this.screen.width < this.x
+        minX = this.x < this.screen.width/2
+
+        maxY = this.screen.height/2 < this.y
+        minY = this.y < 0
+        break;
+      case "LB":
+        maxX = this.screen.width/2 < this.x
+        minX = this.x < 0
+
+        maxY = this.screen.height < this.y
+        minY = this.y < this.screen.height/2
+        break;
+      case "RB":
+        maxX = this.screen.width < this.x
+        minX = this.x < this.screen.width/2
+
+        maxY = this.screen.height < this.y
+        minY = this.y < this.screen.height/2
+        break;
+    }
+
+    if(maxX) {
       this.speedX = -Math.abs(this.speedX)
-    } else if (this.x < 0) {
+    } else if (minX) {
       this.speedX = Math.abs(this.speedX)
     }
 
-    if(this.screen.height < this.y) {
+    if(maxY) {
       this.speedY = -Math.abs(this.speedY)
-    } else if (this.y < 0) {
+    } else if (minY) {
       this.speedY = Math.abs(this.speedY)
     }
 
