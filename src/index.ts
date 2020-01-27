@@ -51,9 +51,7 @@ const container3 = new PIXI.Container();
 
 const container4 = new PIXI.Container();
 
-
-console.log(colors[3].hex())
-const app = new PIXI.Application({ width: 1000, height: 1000, backgroundColor: Number(`0x${colors[3].hex().replace("#","")}`) , antialias: true, forceFXAA: true });
+const app = new PIXI.Application({ width: document.body.clientWidth, height: document.body.clientHeight, backgroundColor: Number(`0x${colors[3].hex().replace("#","")}`) , antialias: true, forceFXAA: true });
 
 app.stage.interactive = true;
 app.stage.addChild(container1)
