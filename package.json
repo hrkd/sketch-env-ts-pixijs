@@ -1,36 +1,82 @@
 {
   "name": "sketch-env-ts-pixijs",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hrkd/test-sketch.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hrkd/test-sketch/issues"
-  },
-  "homepage": "https://github.com/hrkd/test-sketch#readme",
-  "devDependencies": {
-    "html-webpack-plugin": "^3.2.0",
-    "raw-loader": "^3.1.0",
-    "ts-loader": "^6.1.2",
-    "typescript": "^3.6.3",
-    "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.8.1"
-  },
   "dependencies": {
-    "color": "^3.1.2",
-    "pixi.js": "^5.2.0",
+    "@reduxjs/toolkit": "^1.5.0",
+    "@testing-library/jest-dom": "^5.11.8",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.6.0",
+    "axios": "^0.21.1",
+    "classnames": "^2.2.6",
+    "color": "^3.1.3",
+    "csstype": "^3.0.5",
+    "dayjs": "^1.9.8",
+    "firebase": "^8.2.1",
+    "js-cookie": "^2.2.1",
+    "node-sass": "^4.0.0",
+    "pixi.js": "^6.0.2",
+    "polished": "^4.0.5",
+    "qs": "^6.9.4",
     "random-js": "^2.1.0",
-    "tweakpane": "^1.3.0"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.1",
+    "redux-logger": "^3.0.6",
+    "styled-components": "^5.2.1",
+    "tweakpane": "^2.3.0",
+    "typescript": "^4.1.3",
+    "underscore": "^1.12.0",
+    "web-vitals": "^0.2.4",
+    "woothee": "^1.11.1"
+  },
+  "scripts": {
+    "start": "HTTPS=true env-cmd -f .env.development craco start",
+    "build": "rm -fr build && REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) env-cmd -f .env.development craco build",
+    "build:stg": "rm -fr build && REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) env-cmd -f .env.staging craco build",
+    "build:prod": "rm -fr build && REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) env-cmd -f .env.production craco build",
+    "test": "craco test",
+    "eject": "craco eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^6.1.1",
+    "@types/axios": "^0.14.0",
+    "@types/classnames": "^2.2.11",
+    "@types/color": "^3.0.1",
+    "@types/firebase": "^3.2.1",
+    "@types/jest": "^26.0.19",
+    "@types/js-cookie": "^2.2.6",
+    "@types/node": "^12.19.11",
+    "@types/qs": "^6.9.5",
+    "@types/react": "^16.14.2",
+    "@types/react-dom": "^16.9.10",
+    "@types/react-redux": "^7.1.15",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/redux-logger": "^3.0.8",
+    "@types/styled-components": "^5.1.7",
+    "@types/underscore": "^1.10.24",
+    "@types/woothee": "^1.11.0",
+    "craco-raw-loader": "^1.0.1",
+    "env-cmd": "^10.1.0",
+    "raw-loader": "^4.0.2"
   }
 }
