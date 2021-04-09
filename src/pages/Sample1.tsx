@@ -8,55 +8,55 @@ import Tweakpane from 'tweakpane';
 import Color from 'color';
 
 function App() {
-  const PARAMS = {
-    blur: 74.0,
-    resolution: 0.15,
-    bone: false,
-  };
-
-  let colors: Color[] = [
-    Color.rgb(119, 89, 163),
-    Color.rgb(246, 225, 180),
-    Color.rgb(146, 196, 168),
-    Color.rgb(247, 138, 99),
-  ];
-
-  function shuffle(array: Color[]) {
-    array.sort(() => Math.random() - 0.5);
-  }
-  shuffle(colors);
-
-  //filters
-  const myFilter1 = new PIXI.Filter(undefined, fragmentShader, {
-    threshold: 0.6,
-    r: colors[0].array()[0] / 255,
-    g: colors[0].array()[1] / 255,
-    b: colors[0].array()[2] / 255,
-  });
-
-  const myFilter2 = new PIXI.Filter(undefined, fragmentShader, {
-    threshold: 0.6,
-    r: colors[1].array()[0] / 255,
-    g: colors[1].array()[1] / 255,
-    b: colors[1].array()[2] / 255,
-  });
-
-  const myFilter3 = new PIXI.Filter(undefined, fragmentShader, {
-    threshold: 0.6,
-    r: colors[2].array()[0] / 255,
-    g: colors[2].array()[1] / 255,
-    b: colors[2].array()[2] / 255,
-  });
-  // rgb(47%, 35%, 64%)
-
-  const blurFilter = new PIXI.filters.BlurFilter();
-  let bone: Boolean = true;
-
-  blurFilter.blur = PARAMS.blur;
-  blurFilter.resolution = PARAMS.resolution;
-  bone = PARAMS.bone;
-
   useEffect(() => {
+    const PARAMS = {
+      blur: 74.0,
+      resolution: 0.15,
+      bone: false,
+    };
+
+    let colors: Color[] = [
+      Color.rgb(119, 89, 163),
+      Color.rgb(246, 225, 180),
+      Color.rgb(146, 196, 168),
+      Color.rgb(247, 138, 99),
+    ];
+
+    function shuffle(array: Color[]) {
+      array.sort(() => Math.random() - 0.5);
+    }
+    shuffle(colors);
+
+    //filters
+    const myFilter1 = new PIXI.Filter(undefined, fragmentShader, {
+      threshold: 0.6,
+      r: colors[0].array()[0] / 255,
+      g: colors[0].array()[1] / 255,
+      b: colors[0].array()[2] / 255,
+    });
+
+    const myFilter2 = new PIXI.Filter(undefined, fragmentShader, {
+      threshold: 0.6,
+      r: colors[1].array()[0] / 255,
+      g: colors[1].array()[1] / 255,
+      b: colors[1].array()[2] / 255,
+    });
+
+    const myFilter3 = new PIXI.Filter(undefined, fragmentShader, {
+      threshold: 0.6,
+      r: colors[2].array()[0] / 255,
+      g: colors[2].array()[1] / 255,
+      b: colors[2].array()[2] / 255,
+    });
+    // rgb(47%, 35%, 64%)
+
+    const blurFilter = new PIXI.filters.BlurFilter();
+    let bone: Boolean = true;
+
+    blurFilter.blur = PARAMS.blur;
+    blurFilter.resolution = PARAMS.resolution;
+    bone = PARAMS.bone;
+
     //app
     const container1 = new PIXI.Container();
     const container2 = new PIXI.Container();
@@ -141,6 +141,9 @@ function App() {
 
     //run
     document.querySelector('.App')?.appendChild(app.view);
+    return () => {
+      pane.dispose();
+    };
   }, []);
 
   return <div className="App" />;
