@@ -1,15 +1,26 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    // TSはECMAScript 5に変換
     "target": "es5",
-    // TSのモジュールはES Modulesとして出力
-    "module": "es2015",
-    // node_modules からライブラリを読み込む
-    "moduleResolution": "node",
     "lib": [
-      "es2019",
-      "dom"
-    ]
-  }
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src"
+  ]
 }
