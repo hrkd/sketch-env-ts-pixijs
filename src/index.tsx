@@ -5,7 +5,6 @@ import App from './pages/App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { MemoryRouter, HashRouter, Route } from 'react-router-dom';
-import store from './redux';
 
 let Router = MemoryRouter;
 
@@ -16,11 +15,9 @@ console.info('APP VERSION', process.env.REACT_APP_COMMIT_HASH);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <Route component={App} />
-      </Router>
-    </Provider>
+    <Router>
+      <Route component={App} />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
