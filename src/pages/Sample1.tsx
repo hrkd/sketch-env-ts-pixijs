@@ -1,14 +1,17 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import '../styles/App.scss';
 import cn from 'classnames';
 import * as PIXI from 'pixi.js';
-import fragmentShader from '../shader/main.frag';
-import Circle from './circle';
+import Circle from '../components/Sample1/Circle';
 import Tweakpane from 'tweakpane';
 import Color from 'color';
+import { Sample1Filter } from '../filters/Sample1/Sample1Filter';
 
 function App() {
+  const ref = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
+    if (!ref) return;
     const PARAMS = {
       blur: 74.0,
       resolution: 0.15,
@@ -28,21 +31,21 @@ function App() {
     shuffle(colors);
 
     //filters
-    const myFilter1 = new PIXI.Filter(undefined, fragmentShader, {
+    const myFilter1 = new Sample1Filter({
       threshold: 0.6,
       r: colors[0].array()[0] / 255,
       g: colors[0].array()[1] / 255,
       b: colors[0].array()[2] / 255,
     });
 
-    const myFilter2 = new PIXI.Filter(undefined, fragmentShader, {
+    const myFilter2 = new Sample1Filter({
       threshold: 0.6,
       r: colors[1].array()[0] / 255,
       g: colors[1].array()[1] / 255,
       b: colors[1].array()[2] / 255,
     });
 
-    const myFilter3 = new PIXI.Filter(undefined, fragmentShader, {
+    const myFilter3 = new Sample1Filter({
       threshold: 0.6,
       r: colors[2].array()[0] / 255,
       g: colors[2].array()[1] / 255,
@@ -53,8 +56,9 @@ function App() {
     const blurFilter = new PIXI.filters.BlurFilter();
     let bone: Boolean = true;
 
+    console.log(PARAMS);
     blurFilter.blur = PARAMS.blur;
-    blurFilter.resolution = PARAMS.resolution;
+    blurFilter.resolution = 1;
     bone = PARAMS.bone;
 
     //app
@@ -120,7 +124,7 @@ function App() {
         max: 200,
       })
       .on('change', (e) => {
-        blurFilter.blur = e.value;
+        // blurFilter.blur = e.value;
       });
 
     pane
@@ -129,24 +133,25 @@ function App() {
         max: 0.2,
       })
       .on('change', (e) => {
-        blurFilter.resolution = e.value;
+        // blurFilter.resolution = e.value;
       });
 
     pane.addInput(PARAMS, 'bone', {}).on('change', (e) => {
-      bone = e.value;
+      // bone = e.value;
     });
 
     window.onresize = resize;
     window.onload = resize;
 
     //run
-    document.querySelector('.App')?.appendChild(app.view);
+    ref.current?.appendChild(app.view);
+
     return () => {
       pane.dispose();
     };
-  }, []);
+  }, [ref]);
 
-  return <div className="App" />;
+  return <div className="App" ref={ref} />;
 }
 
 export default App;

@@ -1,12 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Index.scss';
-import cn from 'classnames';
-import * as PIXI from 'pixi.js';
-import fragmentShader from '../shader/main.frag';
-import Circle from './circle';
-import Tweakpane from 'tweakpane';
-import Color from 'color';
 
 function App() {
   useEffect(() => {}, []);
