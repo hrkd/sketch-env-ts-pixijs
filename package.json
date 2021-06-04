@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "HOST=0.0.0.0 webpack-dev-server --open --watch --hot --https --config webpack.config.dev.js",
+    "start": "webpack-dev-server --host 0.0.0.0 --public localhost:8080 --open --watch --hot --https --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -35,9 +35,9 @@
     "webpack-merge": "^5.7.3"
   },
   "dependencies": {
-    "@types/three": "^0.129.0",
+    "@types/three": "0.106.0",
     "color": "^3.1.2",
     "random-js": "^2.1.0",
-    "three": "^0.129.0"
+    "three": "0.106.0"
   }
 }
